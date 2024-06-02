@@ -1,3 +1,5 @@
+import json
+
 import pytest
 from fastapi.testclient import TestClient
 from main import app
@@ -79,4 +81,3 @@ def test_delete_user_by_body_not_found():
     response = client.request("DELETE", "/users", json=user_delete_data)
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}
-
