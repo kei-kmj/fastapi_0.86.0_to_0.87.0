@@ -69,14 +69,14 @@ def test_delete_user_by_body_success():
     user_id = response.json()["id"]
 
     user_delete_data = {"user_id": user_id}
-    delete_response = client.delete("/users", json=user_delete_data)
+    delete_response = client.request("DELETE", "/users", json=user_delete_data)
     assert delete_response.status_code == 200
     assert delete_response.json() == {"detail": "User deleted successfully"}
 
 
 def test_delete_user_by_body_not_found():
     user_delete_data = {"user_id": 999}
-    response = client.delete("/users", json=user_delete_data)
+    response = client.request("DELETE", "/users", json=user_delete_data)
     assert response.status_code == 404
     assert response.json() == {"detail": "User not found"}
 
